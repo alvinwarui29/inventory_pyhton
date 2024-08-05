@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-
+import { useNavigate } from 'react-router-dom';
 const AddItems = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -12,6 +12,7 @@ const AddItems = () => {
     supplier: '',
     createdBy:''
   });
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -27,6 +28,7 @@ const AddItems = () => {
       .then(response => {
         console.log(response.data);
         alert('Item added successfully!');
+        navigate("/")
       })
       .catch(error => {
         console.error('There was an error adding the item!', error);

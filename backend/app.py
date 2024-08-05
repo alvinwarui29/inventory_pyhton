@@ -45,7 +45,6 @@ def create_item():
     cur.close()
         
     return jsonify({'message': message}), status_code
-
 @app.route("/delete-item/<int:id>", methods=['DELETE'])
 def delete_item(id):
     try:
