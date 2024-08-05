@@ -44,6 +44,7 @@ const AddItems = () => {
           id="inputEmail4"
           value={formData.name}
           onChange={handleChange}
+          required
         />
       </div>
       <div className="col-md-6">
@@ -55,6 +56,7 @@ const AddItems = () => {
           id="inputPassword4"
           value={formData.description}
           onChange={handleChange}
+          required
         />
       </div>
       <div className="col-md-6">
@@ -66,6 +68,7 @@ const AddItems = () => {
           id="inputAddress"
           value={formData.quantity}
           onChange={handleChange}
+          required
         />
       </div>
       <div className="col-md-6">
@@ -77,6 +80,7 @@ const AddItems = () => {
           name="costPrice"
           value={formData.costPrice}
           onChange={handleChange}
+          required
         />
       </div>
       <div className="col-md-6">
@@ -88,6 +92,7 @@ const AddItems = () => {
           name="selling_price"
           value={formData.selling_price}
           onChange={handleChange}
+          required
         />
       </div>
       <div className="col-md-2">
@@ -99,6 +104,7 @@ const AddItems = () => {
           id="inputZip"
           value={formData.supplier}
           onChange={handleChange}
+          required
         />
       </div>
       <div className="col-12">
