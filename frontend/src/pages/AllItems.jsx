@@ -18,7 +18,7 @@ const AllItems = () => {
 
       const handleEdit = (id) =>{
         ///define edit file
-            navigate(`/${id}`)
+            navigate(`/edit-item/${id}`)
       }
 
       const handleDelete = (id) =>{
