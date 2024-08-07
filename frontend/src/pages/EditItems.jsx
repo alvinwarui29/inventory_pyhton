@@ -47,7 +47,7 @@ const EditItems = () => {
       };
     
   return (
-    <form className="row g-3 m-4" onSubmit={handleSubmit}>
+    <form className="row g-3 m-4 " onSubmit={handleSubmit}>
     <div className="col-md-6">
       <label htmlFor="inputEmail4" className="form-label">Item Name *</label>
       <input
@@ -120,8 +120,8 @@ const EditItems = () => {
         required
       />
     </div>
-    <div className="col-12">
-      <button type="submit" className="btn btn-primary">Add Item</button>
+    <div className='d-flex justify-content-center'>
+      <button type="submit" className="btn btn-primary">Update Item</button>
     </div>
   </form>
   )
