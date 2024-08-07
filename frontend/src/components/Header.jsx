@@ -5,7 +5,7 @@ const Header = () => {
     <div>
       <nav class="navbar navbar-expand-lg bg-dark">
         <div class="container-fluid">
-          <a class="navbar-brand text-light" href="/">
+          <a class="navbar-brand" style={{ color: '#0D6EFD' }} href="/">
             Inventory system
           </a>
           <button
@@ -22,12 +22,12 @@ const Header = () => {
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link active text-light" aria-current="page" href="/">
+                <a class="nav-link active" style={{ color: '#0D6EFD' }} aria-current="page" href="/">
                   All items
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link text-light" href="/add-item">
+                <a class="nav-link" style={{ color: '#0D6EFD' }} href="/add-item">
                   Add Item
                 </a>
               </li>

@@ -9,6 +9,31 @@ CORS(app)
 
 db = MySQL(app)
 
+@app.route("/create-user",methods=['POST'])
+def create_user():
+    user = request.get_json()
+    fName =user.get("firstName") 
+    lName = user.get("lastName")
+    email =user.get("email")
+    password=user.get("password")
+    
+    cur = db.connection.cursor()
+    cur.execute(
+        "INSERT INTO users(first_name,last_name,email,password) VALUES(%s,%s,%s,%s)",
+        (fName,lName,email,password)
+    )
+    if cur.rowcount == 1:
+        db.connection.commit()
+        message = 'Item added successfully!'
+        status_code = 201
+    else:
+        message = 'Failed to add item.'
+        status_code = 500
+        
+    cur.close()
+        
+    return jsonify({'message': message}), status_code
+
 @app.route("/items", methods=['GET'])
 def get_items():
     cur = db.connection.cursor()
