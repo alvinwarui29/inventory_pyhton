@@ -2,12 +2,25 @@ from flask import Flask, jsonify, request
 from flask_mysqldb import MySQL
 from flask_cors import CORS
 from config import Config
+import bcrypt
+from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 
 app = Flask(__name__)
 app.config.from_object(Config)
 CORS(app)
+app.config['JWT_SECRET_KEY'] = 'invetory-management-system'
+jwt = JWTManager(app)
 
 db = MySQL(app)
+
+
+def get_user_by_email(email):
+    cur = db.connection.cursor()
+    cur.execute("SELECT * FROM users WHERE email=%s ",(email,))
+    user = cur.fetchone()
+    cur.close()
+    cur.close()
+    return user
 
 @app.route("/create-user",methods=['POST'])
 def create_user():
@@ -33,6 +46,24 @@ def create_user():
     cur.close()
         
     return jsonify({'message': message}), status_code
+
+@app.route("/login-user", methods=['POST'])
+def login_user():
+    user = request.get_json()
+    email = user.get("email")
+    password = user.get("password")
+    
+    user = get_user_by_email(email)
+    if user:
+        hashed_password = user["password"]
+        if bcrypt.checkpw(password.encode('utf-8'), hashed_password.encode('utf-8')):
+            access_token = create_access_token(identity=email)
+            return jsonify(access_token=access_token), 200
+        else:
+            return jsonify({"message": "Invalid email or password"}), 400
+    else:
+        return jsonify({"message": "Invalid email or password"}), 400
+    
 
 @app.route("/items", methods=['GET'])
 def get_items():
@@ -143,5 +174,11 @@ def update_item(id):
         print(f"Error: {e}")
         return jsonify({'message': 'Failed to update item'}), 500
     
+    
+@app.route('/protected', methods=['GET'])
+@jwt_required()
+def protected():
+    current_user = get_jwt_identity()
+    return jsonify(logged_in_as=current_user), 200
 if __name__ == '__main__':
     app.run(debug=True)
