@@ -5,17 +5,19 @@ import EditItems from './pages/EditItems';
 import Header from './components/Header';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import ProtectedRoute from './components/ProtectedRoute';
+import UnprotectedRoute from './components/UnprotectedRoute';
 
 function App() {
   return (
     <Router>
     <Header/>
         <Routes>
-          <Route path="/" element={<AllItems/>} />
-          <Route path="/add-item" element={<AddItems />} />
-          <Route path="/edit-item/:id" element={<EditItems/>} />
-          <Route path='/login' element={<Login/>} />
-          <Route path='/register' element={<Register/>} />
+        <Route path="/" element={<ProtectedRoute element={AllItems} />} />
+        <Route path="/add-item" element={<ProtectedRoute element={AddItems} />} />
+        <Route path="/edit-item/:id" element={<ProtectedRoute element={EditItems} />} />
+        <Route path="/login" element={<UnprotectedRoute element={Login} />} />
+        <Route path="/register" element={<UnprotectedRoute element={Register} />} />
 
 
         </Routes>

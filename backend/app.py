@@ -178,7 +178,17 @@ def update_item(id):
 @app.route('/protected', methods=['GET'])
 @jwt_required()
 def protected():
-    current_user = get_jwt_identity()
-    return jsonify(logged_in_as=current_user), 200
+    current_user_email = get_jwt_identity()
+    user = get_user_by_email(current_user_email)  
+    print("Current User:", user)
+    if user:
+        return jsonify({
+            "first_name": user["first_name"],
+            "last_name": user["last_name"],
+            "email": user["email"]
+        }), 200
+    else:
+        return jsonify({"message": "User not found"}), 404
+
 if __name__ == '__main__':
     app.run(debug=True)
